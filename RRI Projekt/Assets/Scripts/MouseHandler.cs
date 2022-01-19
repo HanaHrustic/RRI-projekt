@@ -24,7 +24,7 @@ public class MouseHandler : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90, 90);
 
-        cam.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
         this.transform.eulerAngles = new Vector3(0.0f, yRotation, 0.0f);
+        cam.transform.eulerAngles = new Vector3(xRotation, yRotation, 0.0f);
     }
 }

@@ -1,34 +1,36 @@
 ﻿using UnityEngine;
+using System.Collections;
+
 
 public class PlayerController : MonoBehaviour
 {
     CharacterController characterController;
-    public float MovementSpeed = 1;
-    public float Gravity = 9.8f;
-    private float velocity = 0;
+
+    public float speed = 6.0f;
+    public float jumpSpeed = 8.0f;
+    public float gravity = 20.0f;
     public Camera cam;
 
-    private void Start()
+    private Vector3 moveDirection = Vector3.zero;
+
+    void Start()
     {
         characterController = GetComponent<CharacterController>();
     }
 
     void Update()
     {
-        // player movement - forward, backward, left, right
-        float horizontal = Input.GetAxis("Horizontal") * MovementSpeed;
-        float vertical = Input.GetAxis("Vertical") * MovementSpeed;
-        characterController.Move((cam.transform.right * horizontal + cam.transform.forward * vertical) * Time.deltaTime);
-
-        // Gravity
         if (characterController.isGrounded)
         {
-            velocity = 0;
+            moveDirection = cam.transform.right * Input.GetAxis("Horizontal") + cam.transform.forward * Input.GetAxis("Vertical");
+            moveDirection *= speed;
+
+            if (Input.GetButton("Jump"))
+            {
+                moveDirection.y = jumpSpeed;
+            }
         }
-        else
-        {
-            velocity -= Gravity * Time.deltaTime;
-            characterController.Move(new Vector3(0, velocity, 0));
-        }
+        moveDirection.y -= gravity * Time.deltaTime;
+        characterController.Move(moveDirection * Time.deltaTime);
     }
 }
