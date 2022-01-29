@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= amount;
         healthSlider.value = currentHealth;
-        
+        Debug.Log(currentHealth);
         if (currentHealth <= 0 && !isDead)
         {
             StartCoroutine(Death());
