@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int startingHealth = 100;
+    public int startingHealth = 10;
     public int currentHealth;
     public int damageAmount;
 

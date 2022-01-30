@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public Slider healthSlider;
     public Text gameOverText;
-
+    
     bool isDead;
 
     void Awake()
@@ -18,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth = startingHealth;
         healthSlider.value = startingHealth;
+
     }
 
     public void TakeDamage(int amount)

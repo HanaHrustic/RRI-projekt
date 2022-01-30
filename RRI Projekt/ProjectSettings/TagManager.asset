@@ -9,6 +9,8 @@ TagManager:
   - SpiderWallTrigger
   - MonsterWallTrigger
   - LastWallTrigger
+  - KeyTrigger
+  - Addhealth
   layers:
   - Default
   - TransparentFX

@@ -17,6 +17,12 @@ public class PlayerController : MonoBehaviour
     public GameObject spiderWall;
     public GameObject monsterWall;
     public GameObject lastWall;
+    public GameObject Key;
+    public GameObject Key2;
+    public GameObject Key3;
+    public GameObject Potion;
+
+    public static int KeyCount = 0;
 
 
     private Vector3 moveDirection = Vector3.zero;
@@ -39,6 +45,7 @@ public class PlayerController : MonoBehaviour
             }    
             
         }
+        
         if (collision.gameObject.tag == "MonsterWallTrigger" && enemiesKilled < 4)
         {
             monsterSpawner.enabled = true;
@@ -91,6 +98,17 @@ public class PlayerController : MonoBehaviour
                             child.GetComponent<MeshRenderer>().enabled = false;
                             child.GetComponent<MeshCollider>().enabled = false;
                         }
+
+                        if (Key != null)
+                        {
+                            foreach (Transform child in Key.transform)
+                            {
+                                child.GetComponent<MeshRenderer>().enabled = true;
+                                child.GetComponent<BoxCollider>().enabled = true;
+                            }
+                        }
+
+
                     }
                     if (enemiesKilled == 4)
                     {
@@ -99,6 +117,15 @@ public class PlayerController : MonoBehaviour
                             child.GetComponent<MeshRenderer>().enabled = false;
                             child.GetComponent<MeshCollider>().enabled = false;
                         }
+
+                        if (Key2 != null)
+                        {
+                            foreach (Transform child in Key2.transform)
+                            {
+                                child.GetComponent<MeshRenderer>().enabled = true;
+                                child.GetComponent<BoxCollider>().enabled = true;
+                            }
+                        }
                     }
                     if (enemiesKilled == 5)
                     {
@@ -106,6 +133,15 @@ public class PlayerController : MonoBehaviour
                         {
                             child.GetComponent<MeshRenderer>().enabled = false;
                             child.GetComponent<MeshCollider>().enabled = false;
+                        }
+
+                        if (Key3 != null)
+                        {
+                            foreach (Transform child in Key3.transform)
+                            {
+                                child.GetComponent<MeshRenderer>().enabled = true;
+                                child.GetComponent<BoxCollider>().enabled = true;
+                            }
                         }
                     }
                 }
