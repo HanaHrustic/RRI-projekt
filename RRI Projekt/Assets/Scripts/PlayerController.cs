@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "LastWallTrigger" && enemiesKilled < 5)
         {
             lastSpawner.enabled = true;
+            Debug.Log("last wall trigger");
             foreach (Transform child in collision.transform)
             {
                 child.GetComponent<MeshRenderer>().enabled = true;
