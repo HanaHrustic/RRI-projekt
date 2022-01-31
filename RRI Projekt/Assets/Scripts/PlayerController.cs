@@ -14,12 +14,13 @@ public class PlayerController : MonoBehaviour
     public EnemySpawner monsterSpawner;
     public EnemySpawner lastSpawner;
     public static int enemiesKilled = 0;
+    public static int brojac = 3;
     public GameObject spiderWall;
     public GameObject monsterWall;
     public GameObject lastWall;
     public GameObject Key;
-    public GameObject Key2;
-    public GameObject Key3;
+    public GameObject KeySecond;
+    public GameObject KeyThird;
     public GameObject Potion;
 
     public static int KeyCount = 0;
@@ -69,8 +70,30 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (characterController.isGrounded)
+        if (characterController.isGrounded == true && characterController.velocity.magnitude > 2f && GetComponent<AudioSource>().isPlaying == false)
         {
+            GetComponent<AudioSource>().volume = Random.Range(0.8f, 1);
+            GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.1f);
+            GetComponent<AudioSource>().Play();
+        }
+        if (characterController.isGrounded == true && characterController.velocity.magnitude == 0f && GetComponent<AudioSource>().isPlaying == true)
+        {
+            GetComponent<AudioSource>().Stop();
+        }
+
+            if (characterController.isGrounded)
+        {
+            if (characterController.velocity.magnitude > 2f && GetComponent<AudioSource>().isPlaying == false)
+            {
+                GetComponent<AudioSource>().volume = Random.Range(0.8f, 1);
+                GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.1f);
+                GetComponent<AudioSource>().Play();
+            }
+            if (characterController.velocity.magnitude == 0f && GetComponent<AudioSource>().isPlaying == true)
+            {
+                GetComponent<AudioSource>().Stop();
+            }
+
             moveDirection = cam.transform.right * Input.GetAxis("Horizontal") + cam.transform.forward * Input.GetAxis("Vertical");
             moveDirection *= speed;
 
@@ -78,6 +101,7 @@ public class PlayerController : MonoBehaviour
             {
                 moveDirection.y = jumpSpeed;
             }
+           
         }
         moveDirection.y -= gravity * Time.deltaTime;
         characterController.Move(moveDirection * Time.deltaTime);
@@ -118,9 +142,9 @@ public class PlayerController : MonoBehaviour
                             child.GetComponent<MeshCollider>().enabled = false;
                         }
 
-                        if (Key2 != null)
+                        if (KeySecond != null)
                         {
-                            foreach (Transform child in Key2.transform)
+                            foreach (Transform child in KeySecond.transform)
                             {
                                 child.GetComponent<MeshRenderer>().enabled = true;
                                 child.GetComponent<BoxCollider>().enabled = true;
@@ -135,9 +159,9 @@ public class PlayerController : MonoBehaviour
                             child.GetComponent<MeshCollider>().enabled = false;
                         }
 
-                        if (Key3 != null)
+                        if (KeyThird != null)
                         {
-                            foreach (Transform child in Key3.transform)
+                            foreach (Transform child in KeyThird.transform)
                             {
                                 child.GetComponent<MeshRenderer>().enabled = true;
                                 child.GetComponent<BoxCollider>().enabled = true;

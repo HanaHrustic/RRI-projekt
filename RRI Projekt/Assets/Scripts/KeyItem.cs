@@ -5,12 +5,13 @@ using UnityEngine;
 public class KeyItem : MonoBehaviour
 {
     void OnTriggerEnter(Collider collider) {
-        
+            
 
-            if (collider.gameObject.tag == "Player")
+            if (collider.gameObject.tag == "Player" && PlayerController.enemiesKilled == PlayerController.brojac)
             {
                 PlayerController.KeyCount += 1;
                 Destroy(gameObject);
+                PlayerController.brojac += 1;
             }
         
         
