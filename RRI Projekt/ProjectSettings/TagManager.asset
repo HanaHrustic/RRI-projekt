@@ -11,6 +11,8 @@ TagManager:
   - LastWallTrigger
   - KeyTrigger
   - Addhealth
+  - InteractiveObject
+  - End Wall
   layers:
   - Default
   - TransparentFX

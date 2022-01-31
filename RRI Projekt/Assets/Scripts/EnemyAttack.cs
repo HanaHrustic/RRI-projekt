@@ -23,38 +23,27 @@ public class EnemyAttack : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("I am triggered.");
         // If the entering collider is the player...
         if (other.gameObject == player)
         {
+            Debug.Log("In range of player. OnTriggerEnter");
             // ... the player is in range.
             playerInRange = true;
+            if (timer >= timeBetweenAttacks && playerInRange)
+            {
+                Debug.Log("Trying to attack.");
+                // ... attack.
+                Attack();
+            }
         }
     }
-
-
-    void OnTriggerExit(Collider other)
-    {
-        // If the exiting collider is the player...
-        if (other.gameObject == player)
-        {
-            // ... the player is no longer in range.
-            playerInRange = false;
-        }
-    }
-
 
     void Update()
     {
         // Add the time since Update was last called to the timer.
         timer += Time.deltaTime;
-
         // If the timer exceeds the time between attacks, and the player is in range...
-        if (timer >= timeBetweenAttacks && playerInRange)
-        {
-            // ... attack.
-            Attack();
-        }
+        
 
     }
 
@@ -67,7 +56,7 @@ public class EnemyAttack : MonoBehaviour {
         // If the player has health to lose...
         if (playerHealth.currentHealth > 0)
         {
-            Debug.Log("attacking");
+            Debug.Log("Attacking");
             // ... damage the player.
             playerHealth.TakeDamage(attackDamage);
         }

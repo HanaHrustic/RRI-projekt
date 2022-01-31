@@ -26,6 +26,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1109 &-3628133097561222802
+AnimatorTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -168423697472592223}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 1
 --- !u!1102 &-168423697472592223
 AnimatorState:
   serializedVersion: 6
@@ -47,7 +61,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: f18fa5f6e172ba04e8e913c14647a803, type: 2}
-  m_Tag: 
+  m_Tag: door open
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -88,7 +102,7 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3401039945200102619}
-    m_Position: {x: 240, y: 190, z: 0}
+    m_Position: {x: 470, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8953817690549170355}
     m_Position: {x: 240, y: 70, z: 0}
@@ -123,7 +137,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 12b6893dfab8f874ebf1184d1088a3f4, type: 2}
-  m_Tag: 
+  m_Tag: door close
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 

@@ -20,6 +20,7 @@ public class EnemyHealth : MonoBehaviour
         {
             Death();
             PlayerController.enemiesKilled++;
+            Debug.Log("Enemies killed: " + PlayerController.enemiesKilled);
         }
     }
 

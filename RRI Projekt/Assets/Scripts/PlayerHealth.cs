@@ -9,7 +9,8 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public Slider healthSlider;
     public Text gameOverText;
-    
+    public Text winText;
+
     bool isDead;
 
     void Awake()
@@ -25,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= amount;
         healthSlider.value = currentHealth;
-        Debug.Log(currentHealth);
+        Debug.Log("Took damage! Current health: " + currentHealth);
         if (currentHealth <= 0 && !isDead)
         {
             StartCoroutine(Death());
