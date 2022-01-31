@@ -22,8 +22,10 @@ public class AddHealthPoion : MonoBehaviour
         {
             if (playerHealth.currentHealth < 80)
             {
+                Debug.Log("Player drank potion! Previous health: " + playerHealth.currentHealth);
                 playerHealth.currentHealth += 20;
                 playerHealth.healthSlider.value = playerHealth.currentHealth;
+                Debug.Log("Player drank potion! Current health: " + playerHealth.currentHealth);
                 Destroy(gameObject);
             }
         }

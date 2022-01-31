@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 
 public class PlayerController : MonoBehaviour
@@ -22,8 +23,16 @@ public class PlayerController : MonoBehaviour
     public GameObject KeySecond;
     public GameObject KeyThird;
     public GameObject Potion;
+    public Text winText;
+
+    [SerializeField] private KeyCode openDoorKey = KeyCode.Mouse0;
 
     public static int KeyCount = 0;
+
+
+    private const string interactableTag = "InteractiveObject";
+
+    private MyDoorContoller raycastedObj;
 
 
     private Vector3 moveDirection = Vector3.zero;
@@ -47,8 +56,9 @@ public class PlayerController : MonoBehaviour
             
         }
         
-        if (collision.gameObject.tag == "MonsterWallTrigger" && enemiesKilled < 4)
+        if (collision.gameObject.tag == "MonsterWallTrigger" && enemiesKilled == 3)
         {
+            Debug.Log("entered monster spawn part");
             monsterSpawner.enabled = true;
             foreach (Transform child in collision.transform)
             {
@@ -57,7 +67,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if (collision.gameObject.tag == "LastWallTrigger" && enemiesKilled < 5)
+        if (collision.gameObject.tag == "LastWallTrigger" && enemiesKilled == 4)
         {
             lastSpawner.enabled = true;
             Debug.Log("last wall trigger");
@@ -66,6 +76,16 @@ public class PlayerController : MonoBehaviour
                 child.GetComponent<MeshRenderer>().enabled = true;
                 child.GetComponent<MeshCollider>().enabled = true;
             }
+        }
+        if (collision.gameObject.tag == "End Wall")
+        { 
+            Debug.Log("YOU WON!");
+            foreach (Transform child in collision.transform)
+            {
+                child.GetComponent<MeshRenderer>().enabled = true;
+                child.GetComponent<MeshCollider>().enabled = true;
+            }
+            winText.enabled = true;
         }
     }
 
@@ -82,7 +102,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<AudioSource>().Stop();
         }
 
-            if (characterController.isGrounded)
+        if (characterController.isGrounded)
         {
             if (characterController.velocity.magnitude > 2f && GetComponent<AudioSource>().isPlaying == false)
             {
@@ -113,6 +133,15 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit))
             {
+                if (hit.transform.gameObject.tag == interactableTag)
+                {
+                    raycastedObj = hit.collider.gameObject.GetComponent<MyDoorContoller>();
+                    if (Input.GetKeyDown(openDoorKey))
+                    {
+                        raycastedObj.PlayAnimation();
+                    }
+                }
+
                 if (hit.transform.gameObject.tag == "Enemy")
                 {
                     hit.transform.gameObject.GetComponent<EnemyHealth>().TakeDamage();
@@ -132,8 +161,6 @@ public class PlayerController : MonoBehaviour
                                 child.GetComponent<BoxCollider>().enabled = true;
                             }
                         }
-
-
                     }
                     if (enemiesKilled == 4)
                     {

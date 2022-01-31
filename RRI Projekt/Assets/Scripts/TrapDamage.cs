@@ -5,7 +5,8 @@ public class TrapDamage : MonoBehaviour
 {
 
     public float timeBetweenAttacks = 0.5f;     // The time in seconds between each attack.
-    public int attackDamage = 10;               // The amount of health taken away per attack.
+    public int attackDamage = 10;               // The amount of
+                                                // taken away per attack.
 
 
     GameObject player;                          // Reference to the player GameObject.
@@ -29,17 +30,13 @@ public class TrapDamage : MonoBehaviour
         {
             // ... the player is in range.
             playerInRange = true;
-        }
-    }
-
-
-    void OnTriggerExit(Collider other)
-    {
-        // If the exiting collider is the player...
-        if (other.gameObject == player)
-        {
-            // ... the player is no longer in range.
-            playerInRange = false;
+            if (timer >= timeBetweenAttacks && playerInRange)
+            {
+                // ... attack.
+                Debug.Log("Trap damage! Previous health: " + playerHealth.currentHealth);
+                Attack();
+                Debug.Log("Trap damage! Current health: " + playerHealth.currentHealth);
+            }
         }
     }
 
@@ -50,11 +47,7 @@ public class TrapDamage : MonoBehaviour
         timer += Time.deltaTime;
 
         // If the timer exceeds the time between attacks, and the player is in range...
-        if (timer >= timeBetweenAttacks && playerInRange)
-        {
-            // ... attack.
-            Attack();
-        }
+        
 
     }
 
